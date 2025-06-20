@@ -1,6 +1,9 @@
 namespace SpriteKind {
     export const screen = SpriteKind.create()
 }
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    game.reset()
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (flipright == true) {
         loykanikos.image.flipX()
