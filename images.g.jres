@@ -1,0 +1,32 @@
+{
+    "image1": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
+    "image2": {
+        "data": "hwQQABAAAABVfHfFxXXHVVU8M5mXOcNVzDwzcnQyw8zMPDOZlznDzDczMyQlNDNzlZmZd3eXmVksJyTHzCd0xHV1VMfFV5dXLCckx8wndMSVmZl3d5eZWTczM0JFMjNzNzMzmZc5M3PMPDNyfDLDzMw8M5mXOcPMVTwzQkIyw1VVfHfFxXXHVQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage0"
+    },
+    "image3": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage1"
+    },
+    "image4": {
+        "data": "hwQQABAAAAB3d3d3d3d3d0dHR0dHR0d3d3RLS0tLe3RHtMvLy8u7d3dErLy8rEx0R7R7enp6u3d3tLynp7dMdEdEy3p6yrt3d0S8p6e3THRHtHt6enq7d3dErLy8rEx0R7TLy8vLu3d3dEtLS0t7dEdHRERERHR3d3R0dHRER3d3d3d3d3d3dw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage2"
+    },
+    "image5": {
+        "data": "hwQQABAAAAD/////////r5f///////97p/L/////T3qnm/////+8eqdL8v//j7R6p0uc///DtHqnS4z/X8i0ev////////////////////+nS4z1/8i0eqdLPP//ybR6p0v4//8stHqny/////+5eqf0/////y96t////////3n6////////rw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage3"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
