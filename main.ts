@@ -13,6 +13,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         flipright = true
     }
 })
+let bdead = false
 let blueberryy = 0
 let blueberryx = 0
 let loykanikosy = 0
@@ -23,7 +24,6 @@ let cvmiy = 0
 let cvmix = 0
 let eggY = 0
 let eggX = 0
-let bdead = false
 let textSprite: TextSprite = null
 let loykanikos: Sprite = null
 let flipright = false
@@ -292,8 +292,8 @@ game.onUpdate(function () {
 })
 game.onUpdate(function () {
     if (winer == true) {
-        textSprite = textsprite.create("winer", 2, 1)
-        textSprite.setBorder(1, 7)
+        textSprite = textsprite.create("Winner!", 2, 1)
+        textSprite.setBorder(1, 7, 2)
         textSprite.setPosition(80, 60)
         textSprite.changeScale(1.25, ScaleAnchor.Middle)
     }
@@ -314,29 +314,18 @@ game.onUpdate(function () {
 })
 game.onUpdateInterval(2000, function () {
     if (cvmi.overlapsWith(loykanikos)) {
-        gameover = true
-    }
-})
-game.onUpdateInterval(1000, function () {
-    if (loykanikos.overlapsWith(egg)) {
-        if (playerScore >= eggScore) {
-            egg.x = 170
-            eggDead = true
-            playerScore = playerScore + eggScore
+        if (playerScore >= cvmiScore) {
+            cvmi.x = 170
+            sprites.destroy(cvmi)
+            sprites.destroy(cvmiBox)
+            playerScore = playerScore + cvmiScore
             sprites.destroy(strongk)
             strongk = textsprite.create(convertToText(playerScore), 12, 5)
-        }
-    }
-})
-game.onUpdateInterval(1000, function () {
-    if (loykanikos.overlapsWith(blueberry)) {
-        if (playerScore >= blueberryScore) {
-            blueberry.x = 170
-            bdead = true
-            playerScore = playerScore + blueberryScore
-            sprites.destroy(strongk)
-            strongk = textsprite.create(convertToText(playerScore), 12, 5)
+            winer = true
+            loykanikos.setScale(1.4, ScaleAnchor.Middle)
             music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+        } else {
+            gameover = true
         }
     }
 })
@@ -364,4 +353,54 @@ forever(function () {
     blueberryx = blueberry.x
     blueberryy = blueberry.y
     _55555o.setPosition(blueberryx, blueberryy - 10)
+})
+game.onUpdateInterval(500, function () {
+    if (loykanikos.overlapsWith(egg)) {
+        if (playerScore >= eggScore) {
+            egg.x = 170
+            sprites.destroy(egg)
+            sprites.destroy(spriteText2)
+            eggDead = true
+            playerScore = playerScore + eggScore
+            sprites.destroy(strongk)
+            strongk = textsprite.create(convertToText(playerScore), 12, 5)
+            loykanikos.setScale(1.1, ScaleAnchor.Middle)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+        } else {
+            gameover = true
+        }
+    }
+})
+game.onUpdateInterval(500, function () {
+    if (loykanikos.overlapsWith(cocacola)) {
+        if (playerScore >= doryScore) {
+            cocacola.x = 170
+            sprites.destroy(cocacola)
+            sprites.destroy(doryBox)
+            playerScore = playerScore + doryScore
+            sprites.destroy(strongk)
+            strongk = textsprite.create(convertToText(playerScore), 12, 5)
+            loykanikos.setScale(1.3, ScaleAnchor.Middle)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+        } else {
+            gameover = true
+        }
+    }
+})
+game.onUpdateInterval(500, function () {
+    if (loykanikos.overlapsWith(blueberry)) {
+        if (playerScore >= blueberryScore) {
+            blueberry.x = 170
+            sprites.destroy(blueberry)
+            sprites.destroy(_55555o)
+            bdead = true
+            playerScore = playerScore + blueberryScore
+            sprites.destroy(strongk)
+            strongk = textsprite.create(convertToText(playerScore), 12, 5)
+            loykanikos.setScale(1.2, ScaleAnchor.Middle)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+        } else {
+            gameover = true
+        }
+    }
 })
