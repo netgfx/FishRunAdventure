@@ -116,5 +116,12 @@ a 7 7 7 7 7 7 f f 7 7 7 7 7 7 a
         return null;
     })
 
+    helpers._registerFactory("json", function(name: string) {
+        switch(helpers.stringTrim(name)) {
+
+        }
+        return null;
+    })
+
 }
 // Auto-generated code. Do not edit.

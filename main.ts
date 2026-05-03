@@ -5,15 +5,19 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     game.reset()
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (flipright == true) {
-        loykanikos.image.flipX()
-        flipright = false
+    if (gameover == false) {
+        if (flipright == true) {
+            loykanikos.image.flipX()
+            flipright = false
+        }
     }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(flipright == true)) {
-        loykanikos.image.flipX()
-        flipright = true
+    if (gameover == false) {
+        if (!(flipright == true)) {
+            loykanikos.image.flipX()
+            flipright = true
+        }
     }
 })
 let bdead = false
@@ -28,8 +32,10 @@ let cvmix = 0
 let eggY = 0
 let eggX = 0
 let textSprite: TextSprite = null
+let final_text_value = ""
 let loykanikos: Sprite = null
 let flipright = false
+let gameover = false
 scene.setBackgroundImage(img`
     666666666666999966666666666dddddddddddddd996666669999999666999666999999666666666669999666666666666666666699999966666699999666666669999666666666699966666696666666
     66666666999999999996666666dd6666666699999d99669999966699999999996666669999966999999666666666666666666666666699999996666999999999999966666669666666999999966666666
@@ -157,7 +163,7 @@ let eggScore = 5
 let blueberryScore = 15
 let doryScore = 20
 let cvmiScore = 50
-let gameover = false
+gameover = false
 flipright = false
 let winer = false
 loykanikos = sprites.create(img`
@@ -204,7 +210,7 @@ let spriteText2 = textsprite.create(convertToText(eggScore), 12, 5)
 let _55555o = textsprite.create(convertToText(blueberryScore), 12, 5)
 let doryBox = textsprite.create(convertToText(doryScore), 12, 5)
 let cvmiBox = textsprite.create(convertToText(cvmiScore), 12, 5)
-controller.moveSprite(loykanikos)
+controller.moveSprite(loykanikos, 100, 100)
 let cvmi = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . f f f f f f . . . 
@@ -266,6 +272,18 @@ let cocacola = sprites.create(img`
 cocacola.x = 0
 cocacola.y = 90
 cvmi.follow(loykanikos, 8)
+if (gameover) {
+    loykanikos.setPosition(0, 0)
+}
+game.onUpdate(function () {
+    if (gameover == true && final_text_value != "Game Over!") {
+        textSprite = textsprite.create("Game Over!", 4, 1)
+        final_text_value = "Game Over!"
+        textSprite.setBorder(1, 5, 2)
+        textSprite.setPosition(80, 60)
+        textSprite.changeScale(1.25, ScaleAnchor.Middle)
+    }
+})
 game.onUpdate(function () {
     if (eggDead == false) {
         if (egg.x > 160) {
@@ -286,16 +304,9 @@ game.onUpdate(function () {
     }
 })
 game.onUpdate(function () {
-    if (gameover == true) {
-        textSprite = textsprite.create("Game Over!", 4, 1)
-        textSprite.setBorder(1, 5, 2)
-        textSprite.setPosition(80, 60)
-        textSprite.changeScale(1.25, ScaleAnchor.Middle)
-    }
-})
-game.onUpdate(function () {
-    if (winer == true) {
+    if (winer == true && final_text_value != "\"Winner\"") {
         textSprite = textsprite.create("Winner!", 2, 1)
+        final_text_value = "\"Winner\""
         textSprite.setBorder(1, 7, 2)
         textSprite.setPosition(80, 60)
         textSprite.changeScale(1.25, ScaleAnchor.Middle)
@@ -351,11 +362,30 @@ forever(function () {
     loykanikosx = loykanikos.x
     loykanikosy = loykanikos.y
     strongk.setPosition(loykanikosx, loykanikosy - 7)
+    if (gameover) {
+        loykanikos.setPosition(72, 62)
+    }
 })
 forever(function () {
     blueberryx = blueberry.x
     blueberryy = blueberry.y
     _55555o.setPosition(blueberryx, blueberryy - 10)
+})
+game.onUpdateInterval(500, function () {
+    if (loykanikos.overlapsWith(cocacola)) {
+        if (playerScore >= doryScore) {
+            cocacola.x = 170
+            sprites.destroy(cocacola)
+            sprites.destroy(doryBox)
+            playerScore = playerScore + doryScore
+            sprites.destroy(strongk)
+            strongk = textsprite.create(convertToText(playerScore), 12, 5)
+            loykanikos.setScale(1.3, ScaleAnchor.Middle)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
+        } else {
+            gameover = true
+        }
+    }
 })
 game.onUpdateInterval(500, function () {
     if (loykanikos.overlapsWith(egg)) {
@@ -368,22 +398,6 @@ game.onUpdateInterval(500, function () {
             sprites.destroy(strongk)
             strongk = textsprite.create(convertToText(playerScore), 12, 5)
             loykanikos.setScale(1.1, ScaleAnchor.Middle)
-            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
-        } else {
-            gameover = true
-        }
-    }
-})
-game.onUpdateInterval(500, function () {
-    if (loykanikos.overlapsWith(cocacola)) {
-        if (playerScore >= doryScore) {
-            cocacola.x = 170
-            sprites.destroy(cocacola)
-            sprites.destroy(doryBox)
-            playerScore = playerScore + doryScore
-            sprites.destroy(strongk)
-            strongk = textsprite.create(convertToText(playerScore), 12, 5)
-            loykanikos.setScale(1.3, ScaleAnchor.Middle)
             music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
         } else {
             gameover = true
